@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Выпускной 2025 | Сергиев-Посадский ФМЛ</title>
+  
+  <!-- Предзагрузка шрифтов -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+  <style>
+    :root {
+      --primary: #800020;
+      --secondary: #FFD700;
+      --light: #f8f8f8;
+      --dark: #222;
+      --symbol-size: clamp(3rem, 4vw, 4rem);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI';
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      font-size: 1.1rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    /* Карусель */
+    .photo-carousel {
+      position: relative;
+      height: 50vh;
+      max-height: 500px;
+      min-height: 300px;
+      overflow: hidden;
+      margin-bottom: 5vh;
+      touch-action: pan-y;
+    }
+
+    .carousel-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      background-size: cover;
+      background-position: center;
+      will-change: opacity;
+    }
+
+    .carousel-item.active {
+      opacity: 1;
+    }
+
+    .carousel-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    /* Символы */
+    #symbol-overlay {
+      position: fixed;
+      top: -50vh;
+      left: -50vw;
+      width: 200vw;
+      height: 200vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      contain: strict;
+    }
+
+    .math-symbol {
+      position: absolute;
+      font-size: var(--symbol-size);
+      opacity: 0;
+      animation: floatSymbol 15s linear forwards;
+      color: rgba(128, 0, 32, 0.2);
+      user-select: none;
+      font-family: 'Caveat', cursive;
+      white-space: nowrap;
+      will-change: transform, opacity;
+      text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes floatSymbol {
+      0% {
+        transform: translateY(0) scale(0.8) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      80% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5) translateX(30vw);
+        opacity: 0;
+      }
+    }
+
+    /* Контент */
+    .container {
+      max-width: min(800px, 90vw);
+      margin: -8vh auto 0;
+      background: white;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+      padding: clamp(20px, 4vw, 40px);
+      position: relative;
+      z-index: 2;
+      border-radius: 8px;
+    }
+
+    h1, h2, h3 {
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .header-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2vh;
+    }
+
+    .handwritten-title {
+      font-family: 'Caveat', 'Apple Chancery', 'URW Chancery L';
+      font-size: clamp(2.5rem, 6.5vw, 4rem);
+      color: var(--primary);
+      margin: 0;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .logo {
+      width: min(150px, 30vw);
+      height: auto;
+      margin: 2vh 0;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: logoAppear 1s ease-out 0.5s forwards;
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    @keyframes logoAppear {
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4.5vw, 2.3rem);
+      color: var(--primary);
+      margin: 3vh 0 1.5vh;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .info-block {
+      margin-bottom: 4vh;
+      text-align: center;
+      font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    }
+
+    .invitation-text {
+      font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+      line-height: 1.8;
+      text-align: center;
+      margin: 3vh 0;
+    }
+
+    .invitation-text p {
+      margin-bottom: 2vh;
+    }
+
+    .highlight {
+      background-color: var(--primary);
+      color: white;
+      padding: clamp(15px, 3vw, 30px);
+      margin: 4vh -4vw;
+      text-align: center;
+      border-radius: 4px;
+      font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    }
+
+    .highlight h2 {
+      color: white;
+      margin-bottom: 2vh;
+    }
+
+    .event-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+      gap: 15px;
+      margin: 3vh 0;
+    }
+
+    .detail-item {
+      border-left: 3px solid var(--primary);
+      padding-left: 12px;
+    }
+
+    .detail-item2 {
+      border-left: 3px solid var(--primary);
+      padding-left: 12px;
+    } 
+    
+    .detail-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: var(--primary);
+      font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+    }
+
+    .location-block {
+      text-align: center;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    .map-link {
+      display: inline-block;
+      background: #878787;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      margin-top: 2vh;
+      border-radius: 4px;
+      transition: background 0.3s;
+      font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+    }
+
+    .map-link:hover, .map-link:focus {
+      background: #878787;
+    }
+
+    /* Стили для кнопки регистрации */
+    .register-btn {
+      display: block;
+      background: #600018;
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      margin: 4vh auto;
+      border-radius: 50px;
+      transition: all 0.3s;
+      font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+      text-align: center;
+      max-width: 300px;
+      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .register-btn:hover {
+      background: #CC0000;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+    }
+
+    .register-btn:active {
+      transform: translateY(1px);
+    }
+
+    .register-btn::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.2) 50%, transparent 75%);
+      background-size: 200% 100%;
+      animation: shine 2s infinite;
+    }
+
+    @keyframes shine {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--primary), transparent);
+      margin: 3vh 0;
+    }
+
+    .signature {
+      font-family: 'Caveat', 'Apple Chancery', 'URW Chancery L', cursive;
+      font-size: clamp(1.5rem, 4.5vw, 1.8rem);
+      text-align: right;
+      margin-top: 3vh;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 5vh;
+      color: #666;
+      font-size: clamp(1rem, 3.5vw, 1.2rem);
+      padding-bottom: 2vh;
+    }
+
+    /* Анимация конверта */
+    #envelope-animation {
+      position: fixed;
+      inset: 0;
+      background: rgba(253, 245, 230, 0.95);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1.2s ease, backdrop-filter 0.5s ease;
+      backdrop-filter: blur(0px);
+      overflow: hidden;
+    }
+
+    #envelope-animation.fade-out {
+      opacity: 0;
+      backdrop-filter: blur(10px);
+      pointer-events: none;
+    }
+
+    .envelope-container {
+      perspective: 2000px;
+      transform-style: preserve-3d;
+      width: 400px;
+      height: 280px;
+      position: relative;
+    }
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .envelope.opened {
+      transform: translateY(-50px) rotateX(15deg);
+    }
+
+    .flap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #9e0000 0%, #7a0000 30%, #5a0000 100%);
+      clip-path: polygon(0% 0%, 50% 50%, 100% 0%, 100% 100%, 0% 100%);
+      transform-origin: top;
+      transform: rotateX(0deg);
+      transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      z-index: 3;
+      box-shadow: 
+        0 10px 25px rgba(0,0,0,0.3),
+        inset 0 -5px 20px rgba(0,0,0,0.2);
+      border-radius: 5px 5px 0 0;
+    }
+
+    .envelope.opened .flap {
+      transform: rotateX(-180deg) translateY(-10px);
+    }
+
+    .body {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #fff8dc;
+      z-index: 2;
+      border: 2px solid #8B0000;
+      box-shadow:
+        inset 0 0 15px rgba(0,0,0,0.1),
+        0 15px 30px rgba(0,0,0,0.2);
+      border-radius: 0 0 8px 8px;
+      transform: translateZ(-20px);
+      overflow: hidden;
+    }
+
+    .letter {
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      background: white;
+      left: 5%;
+      top: 5%;
+      transform: translateY(100%);
+      transition: transform 1s ease 0.4s;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      color: #333;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+    }
+
+    .envelope.opened .letter {
+      transform: translateY(0);
+    }
+
+    .seal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle at center, #ff4d4d, #b22222 70%);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      z-index: 4;
+      cursor: pointer;
+      box-shadow:
+        0 5px 15px rgba(0,0,0,0.3),
+        inset 0 5px 10px rgba(255,200,200,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-family: 'Caveat', cursive;
+      font-size: 2.2rem;
+      user-select: none;
+      text-shadow: 0 2px 3px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
+    }
+
+    .seal:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow:
+        0 7px 20px rgba(0,0,0,0.4),
+        inset 0 5px 10px rgba(255,200,200,0.8);
+    }
+
+    .seal:active {
+      transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    .envelope-shadow {
+      position: absolute;
+      width: 90%;
+      height: 20px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 50%;
+      bottom: -15px;
+      left: 5%;
+      filter: blur(10px);
+      transition: all 1s ease;
+      z-index: 1;
+    }
+
+    .envelope.opened ~ .envelope-shadow {
+      width: 110%;
+      height: 30px;
+      filter: blur(15px);
+      bottom: -25px;
+    }
+
+    /* Таймер */
+    #countdown {
+      letter-spacing: 0.05em;
+      user-select: none;
+      transition: color 0.3s ease;
+      font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+      text-align: center;
+      padding: 12px 0;
+      font-family: 'Segoe UI', cursive;
+      color: var(--primary);
+      background: #f0e6d2;
+      border-top: 2px solid var(--primary);
+    }
+
+    #countdown.expired {
+      color: #a00;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    /* Оптимизации для мобильных */
+    @media (hover: none) {
+      .math-symbol {
+        animation-duration: 20s;
+      }
+      .register-btn::after {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .register-btn {
+        padding: 12px 24px;
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .register-btn::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="envelope-animation">
+  <div class="envelope-container">
+    <div class="envelope" id="envelope">
+      <div class="flap"></div>
+      <div class="body">
+        <div class="letter">
+          Приглашение на выпускной 2025
+        </div>
+      </div>
+    </div>
+    <div class="envelope-shadow"></div>
+    <div class="seal" id="seal">
+      <img src="img/7.png" alt="Печать" class="seal-img">
+    </div>
+  </div>
+</div>
+  <!-- Слой для символов -->
+  <div id="symbol-overlay"></div>
+
+  <!-- Карусель фотографий -->
+  <div class="photo-carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="background-image: url('img/1.jpg');"></div>
+      <div class="carousel-item" style="background-image: url('img/2.jpg');"></div>
+      <div class="carousel-item" style="background-image: url('img/3.jpg');"></div>
+      <div class="carousel-item" style="background-image: url('img/7.jpg');"></div>
+      <div class="carousel-item" style="background-image: url('img/10.jpg');"></div>
+      <div class="carousel-item" style="background-image: url('img/9.jpg');"></div>
+      <div class="carousel-overlay"></div>
+    </div>
+  </div>
+
+  <!-- Основное содержимое -->
+  <div class="container">
+    <header class="info-block">
+      <div class="header-wrapper">
+        <h1 class="handwritten-title">Выпускной 2025</h1>
+        <img src="img/6.jpg" alt="Логотип ФМЛ" class="logo" loading="lazy" width="150" height="150">
+      </div>
+    </header>
+
+    <hr>
+
+    <div class="info-block">
+      <h3>СЕРГИЕВО-ПОСАДСКИЙ</h3>
+      <p>ФИЗИКО-МАТЕМАТИЧЕСКИЙ ЛИЦЕЙ</p>
+    </div>
+
+    <div class="highlight">
+      <h2>ДОРОГИЕ НАШИ УЧИТЕЛЯ!</h2>
+    </div>
+
+    <div class="invitation-text">
+      <p>Приглашаем Вас на самый трогательный и волнующий праздник  —  <br>выпускной вечер 11 классов!</p>
+      <p>В этот особенный день мы хотим сказать вам «СПАСИБО» за терпение, вдохновение, веру в наши силы, за ваш профессионализм, вклад в наши знания, мудрость и тепло ваших сердец.</p>
+    </div>
+
+    <div class="event-details">
+      <div class="detail-item">
+        <div class="detail-title">Дата</div>
+        <p>26 июня 2025 года</p>
+      </div>
+      <div class="detail-item2">
+        <div class="detail-title">Время</div>
+        <p>16:00</p>
+      </div>
+    </div>
+
+    <div class="location-block info-block">
+      <h2>Место проведения</h2>
+      <p>Город Сергиев Посад</p>
+      <p>Улица Митькина, 14/2</p>
+      <p>Ресторан "Царская Деревня"</p>
+      <a href="https://go.2gis.com/1rCd8" class="map-link" target="_blank" rel="noopener">Открыть в 2GIS</a>
+    </div>
+
+    <!-- Кнопка регистрации -->
+    <a href="https://forms.yandex.ru/u/6828b0c5505690e6c0ddae7b/" class="register-btn" target="_blank" rel="noopener">
+      Подтвердить своё присутсвие
+    </a>
+
+    <div class="invitation-text">
+      <p>Пусть этот вечер станет ярким финалом нашего школьного пути и началом новых достижений!</p>
+      <div class="signature">
+        С уважением и благодарностью,<br>
+        Выпускники 11 класса
+      </div>
+    </div>
+
+    <hr>
+    <div id="countdown" aria-label="Обратный отсчет до 26 июня 2025 года 16:00" role="timer">
+      Время до праздника: <span id="countdown-timer">загрузка...</span>
+    </div>
+
+    <footer>
+      <p>Физико-математический лицей</p>
+      <p>© 2025 Все права защищены</p>
+    </footer>
+  </div>
+
+  <script>
+    // Оптимизированная карусель
+    document.addEventListener('DOMContentLoaded', function () {
+      const items = document.querySelectorAll('.carousel-item');
+      if(items.length === 0) return;
+      
+      let currentItem = 0;
+      const itemCount = items.length;
+      let carouselInterval;
+
+      function showNextItem() {
+        items[currentItem].classList.remove('active');
+        currentItem = (currentItem + 1) % itemCount;
+        items[currentItem].classList.add('active');
+      }
+
+      function startCarousel() {
+        carouselInterval = setInterval(showNextItem, 5000);
+      }
+
+      function pauseCarousel() {
+        clearInterval(carouselInterval);
+      }
+
+      startCarousel();
+      
+      // Пауза при неактивной вкладке
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          pauseCarousel();
+        } else {
+          startCarousel();
+        }
+      });
+    });
+
+    // Оптимизированные символы
+    const symbols = [
+      '∑', 'π', 'Δ', '√', '∞', 'E=mc²', '∫', 'ƒ', 'λ', 'ℏ', '∇', '⊕',
+      'x²', 'y′', '≈', '≠', '≥', '≤', '∂', 'θ', 'Ω', 'μ', 'β', 'α', '∝',
+      '∅', '∃', '∀', '≡', '⇌', '↔', '→', '←', '∠', '∴', '∵', '⋅', '⊗'
+    ];
+
+    const overlay = document.getElementById('symbol-overlay');
+    let symbolCount = 0;
+    const maxSymbols = 25;
+    let symbolInterval;
+
+    function createSymbol() {
+      if(symbolCount >= maxSymbols) return;
+      
+      const symbol = document.createElement('div');
+      symbol.className = 'math-symbol';
+      symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+      symbol.style.left = (Math.random() * 200 - 50) + 'vw';
+      symbol.style.top = (50 + Math.random() * 150) + 'vh';
+      symbol.style.fontSize = (2 + Math.random() * 3) + 'rem';
+      symbol.style.animationDuration = (12 + Math.random() * 8) + 's';
+
+      overlay.appendChild(symbol);
+      symbolCount++;
+
+      setTimeout(() => {
+        overlay.removeChild(symbol);
+        symbolCount--;
+      }, 20000);
+    }
+
+    function startSymbols() {
+      if(!overlay) return;
+      symbolInterval = setInterval(createSymbol, 600);
+    }
+
+    function stopSymbols() {
+      clearInterval(symbolInterval);
+    }
+
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      startSymbols();
+      
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          stopSymbols();
+        } else {
+          startSymbols();
+        }
+      });
+    }
+    
+    // Анимация конверта
+    const seal = document.getElementById('seal');
+    const envelope = document.getElementById('envelope');
+    const animationOverlay = document.getElementById('envelope-animation');
+    let isOpened = false;
+
+    seal.addEventListener('click', () => {
+      if(isOpened) return;
+      isOpened = true;
+      
+      seal.style.transform = 'translate(-50%, -50%) scale(1.2)';
+      seal.style.boxShadow = '0 10px 25px rgba(0,0,0,0.4), inset 0 5px 15px rgba(255,255,255,0.7)';
+      seal.style.display = 'none';
+      
+      setTimeout(() => {
+        envelope.classList.add('opened');
+        
+        setTimeout(() => {
+          seal.style.opacity = '0';
+          seal.style.transform = 'translate(-50%, -150%) scale(0.8) rotate(20deg)';
+        }, 800);
+        
+        setTimeout(() => {
+          animationOverlay.classList.add('fade-out');
+        }, 1500);
+        
+        setTimeout(() => {
+          animationOverlay.style.display = 'none';
+        }, 2500);
+      }, 300);
+    });
+
+    // Таймер обратного отсчета
+    (function() {
+      const countdownElem = document.getElementById('countdown-timer');
+      const targetDate = new Date('2025-06-26T16:00:00');
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if(diff <= 0) {
+          countdownElem.textContent = 'Праздник наступил!';
+          countdownElem.parentElement.classList.add('expired');
+          clearInterval(timerId);
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        countdownElem.textContent = 
+          `${days} дн ` +
+          `${hours.toString().padStart(2,'0')} ч ` +
+          `${minutes.toString().padStart(2,'0')} мин ` +
+          `${seconds.toString().padStart(2,'0')} с`;
+      }
+
+      updateCountdown();
+      const timerId = setInterval(updateCountdown, 1000);
+    })();
+  </script>
+</body>
+</html>
